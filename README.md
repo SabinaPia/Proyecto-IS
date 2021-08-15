@@ -12,7 +12,7 @@
  5) Eliminar información Eventos, Revistas (Admin)
 # Arquitectura
  Modelo - Vista - Controlador
-#Interfaces
+# Interfaces
 ![1](https://user-images.githubusercontent.com/83424577/129466896-f79ee1f0-14b3-4c54-ac44-6e3b2f49e22a.PNG)
 ![2](https://user-images.githubusercontent.com/83424577/129466901-d01c0c2b-dbab-4384-b079-b6a24793cfb5.PNG)
 ![3](https://user-images.githubusercontent.com/83424577/129466905-6b8da722-d790-4be8-b934-c4486434045c.PNG)
