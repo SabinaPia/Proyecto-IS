@@ -25,9 +25,9 @@
   </footer>
 
   <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="views/js/vendor/modernizr-3.11.2.min.js"></script>
-  <script src="views/js/plugins.js"></script>
-  <script src="views/js/main.js"></script>
+  <script src="vistas/js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="vistas/js/plugins.js"></script>
+  <script src="vistas/js/main.js"></script>
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>

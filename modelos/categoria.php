@@ -1,17 +1,21 @@
 <?php
+require_once "conexion.php";
 
-class Area
+class Categoria
 {
-	private $pdo;
+	private $conexion;
     
     public $id;
     public $nombre;
+    public $icono;
+ 
 
 	public function __CONSTRUCT()
 	{
 		try
 		{
-			$this->pdo = Conexion::Conectar();     
+			$this->$conexion = new MysqlConexion();   
+			$this->$conexion->Conectar();
 		}
 		catch(Exception $e)
 		{
@@ -25,7 +29,7 @@ class Area
 		{
 			$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM areas");
+			$stm = $this->conexion->prepare("SELECT * FROM categorias");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -40,8 +44,7 @@ class Area
 	{
 		try 
 		{
-			$stm = $this->pdo
-			          ->prepare("SELECT * FROM areas WHERE id = ?");
+			$stm = $this->conexion->prepare("SELECT * FROM categorias WHERE id = ?");
 			          
 
 			$stm->execute(array($id));

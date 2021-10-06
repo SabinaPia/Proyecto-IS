@@ -1,11 +1,12 @@
 <?php
+require_once "conexion.php";
+
 class Evento
 {
-	private $pdo;
-	private $total_registro;
-    
+	private $conexion;
+  
     public $id;
-    public $titulo;
+    //public $titulo;
     public $fecha_ini;
     public $fecha_fin;  
     public $fecha_publ;
@@ -18,7 +19,9 @@ class Evento
 	{
 		try
 		{
-			$this->pdo = Conexion::Conectar();     
+			$this->$conexion = new MysqlConexion();   
+			$this->$conexion->Conectar();   
+
 		}
 		catch(Exception $e)
 		{
@@ -32,7 +35,7 @@ class Evento
 		{
 			$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM eventos");
+			$stm = $this->conexion->prepare("SELECT * FROM eventos");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -49,11 +52,11 @@ class Evento
 		{
 			$result = array();
 
-			$stm = $this->pdo->prepare("SELECT id_evento, titulo, fecha_ini, fecha_fin, pais,
+			$stm = $this->pdo->prepare("SELECT eventos.id, titulo, fecha_ini, fecha_fin, pais,
 										categoria, publicador
 										FROM eventos
 										INNER JOIN categorias_evento
-										ON eventos.id_categoria = categorias_evento.id_categoria
+										ON eventos.id_categoria = categorias.id_categoria
 										INNER JOIN publicadores
 										ON eventos.id_publicador = publicadores.id_publicador
 										AND eventos.id_categoria = 1 
@@ -63,7 +66,7 @@ class Evento
                   						categoria, publicador
 										FROM eventos
 										INNER JOIN categorias_evento
-										ON eventos.id_categoria = categorias_evento.id_categoria
+										ON eventos.id_categoria = categorias.id_categoria
 										INNER JOIN publicadores
 										ON eventos.id_publicador = publicadores.id_publicador
 										AND eventos.id_categoria = 2 
@@ -99,42 +102,6 @@ class Evento
 			$total_registro = $stm->fetch(PDO::FETCH_OBJ);
 
 			return $stm->fetch(PDO::FETCH_OBJ);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
-	}
-
-	public function Listar_pag()
-	{
-		try 
-		{
-			$result = array();
-			$por_pagina = 7;
-            $pagina = 1;
-			/*
-            if(empty($_GET['pagina']))
-                $pagina = 1;
-            else
-                $pagina = $_GET['pagina'];
-            }*/
-
-            $desde = ($pagina-1) * $por_pagina;
-            $total_pag = ceil($total_registro / $por_pagina);
-
-        	$stm = $this->pdo->prepare("SELECT id_evento, titulo, publicador, categoria, area
-										FROM eventos
-										INNER JOIN categorias_evento
-										ON eventos.id_categoria = categorias_evento.id_categoria
-										INNER JOIN publicadores
-										ON eventos.id_publicador = publicadores.id_publicador 
-										INNER JOIN areas
-										ON eventos.id_area = areas.id_area
-										ORDER BY id_evento ASC LIMIT $desde, $por_pagina
-			");
-			          
-			$stm->execute();
-			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());

@@ -49,8 +49,8 @@ class Revista
 			$stm = $this->pdo
 			          ->prepare("SELECT * FROM revistas
 					  			INNER JOIN publicadores
-								ON revistas.id_publicador = revistas.id_publicador
-					   			WHERE id_revista = ?");
+								ON revistas.publicador_id = publicadores.id
+					   			WHERE id = ?");
 			          
 
 			$stm->execute(array($id));
@@ -94,13 +94,13 @@ class Revista
             $desde = ($pagina-1) * $por_pagina;
             $total_pag = ceil($total_registro / $por_pagina);
 
-        	$stm = $this->pdo->prepare("SELECT id_revista, titulo, publicador, area
+        	$stm = $this->pdo->prepare("SELECT revistas.id, titulo, publicadores.nombre, areas.nombre
 										FROM revistas
 										INNER JOIN publicadores
-										ON revistas.id_publicador = publicadores.id_publicador 
+										ON revistas.publicador_id= publicadores.id
 										INNER JOIN areas
-										ON revistas.id_area = areas.id_area
-										ORDER BY id_revista ASC LIMIT $desde, $por_pagina
+										ON revistas.id = areas.id
+										ORDER BY id  ASC LIMIT $desde, $por_pagina
 			");
 			          
 			$stm->execute();

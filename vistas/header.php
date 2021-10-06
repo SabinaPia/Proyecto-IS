@@ -17,13 +17,13 @@ $pagina = str_replace(".php", "", $archivo);
   <meta property="og:image" content="">
 
   <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="views/icon.png">
+  <link rel="apple-touch-icon" href="vistas/icon.png">
   <!-- Place favicon.ico in the root directory -->
   
-  <link rel="stylesheet" href="views/css/normalize.css">
+  <link rel="stylesheet" href="vistas/css/normalize.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald|PT+Sans">
-  <link rel="stylesheet" href="views/css/all.css">
-  <link rel="stylesheet" href="views/css/main.css?v=0.0.1">
+  <link rel="stylesheet" href="vistas/css/all.css">
+  <link rel="stylesheet" href="vistas/css/main.css?v=0.0.1">
   <meta name="theme-color" content="#fafafa"> 
 
 </head>
@@ -41,7 +41,7 @@ $pagina = str_replace(".php", "", $archivo);
   <div class="barra">
       <div class="contenedor clearfix">
         <div class= "logo">
-            <img src="views/img/logo.png" alt="logo">
+            <img src="vistas/img/logo.png" alt="logo">
         </div>
 
         <div class="menu-movil">

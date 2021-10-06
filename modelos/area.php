@@ -1,18 +1,19 @@
 <?php
+require_once "conexion.php";
 
-class Publicador
+class Area
 {
-	private $pdo;
+	private $conexion;
     
     public $id;
     public $nombre;
-    public $imagen;
 
 	public function __CONSTRUCT()
-	{
+	{ 
 		try
 		{
-			$this->pdo = Conexion::Conectar();     
+			$this->$conexion = new MysqlConexion();   
+			$conexion->Conectar();   
 		}
 		catch(Exception $e)
 		{
@@ -26,7 +27,7 @@ class Publicador
 		{
 			$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM publicadores");
+			$stm = $this->conexion->prepare("SELECT * FROM areas");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -41,8 +42,8 @@ class Publicador
 	{
 		try 
 		{
-			$stm = $this->pdo
-			          ->prepare("SELECT * FROM publicadores WHERE id = ?");
+			$stm = $this->conexion
+			          ->prepare("SELECT * FROM areas WHERE id = ?");
 			          
 
 			$stm->execute(array($id));
@@ -52,6 +53,7 @@ class Publicador
 			die($e->getMessage());
 		}
 	}
-    
+
 }
+
 ?>

@@ -1,19 +1,20 @@
 <?php
+require_once "conexion.php";
 
-class Categoria
+class Publicador
 {
-	private $pdo;
+	private $conexion;
     
     public $id;
     public $nombre;
-    public $icono;
- 
+    public $imagen;
 
 	public function __CONSTRUCT()
 	{
 		try
-		{
-			$this->pdo = Conexion::Conectar();     
+		{		
+			$this->$conexion = new MysqlConexion();   
+			$this->$conexion->Conectar();    
 		}
 		catch(Exception $e)
 		{
@@ -27,7 +28,7 @@ class Categoria
 		{
 			$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM categorias_evento");
+			$stm = $this->pdo->prepare("SELECT * FROM publicadores");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -42,7 +43,8 @@ class Categoria
 	{
 		try 
 		{
-			$stm = $this->pdo->prepare("SELECT * FROM categorias_evento WHERE id = ?");
+			$stm = $this->pdo
+			          ->prepare("SELECT * FROM publicadores WHERE id = ?");
 			          
 
 			$stm->execute(array($id));
@@ -52,7 +54,6 @@ class Categoria
 			die($e->getMessage());
 		}
 	}
-
+    
 }
-
 ?>
